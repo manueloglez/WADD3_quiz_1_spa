@@ -1,4 +1,5 @@
 const BASE_URL = 'http://localhost:3000/api/v1'
+const IMAGE_DEFAULT = 'https://www.flytap.com/-/media/Flytap/new-tap-pages/travelling-with-animals/pets/flying-with-pets-og-image-1200x630.jpg'
 
 const Pet = {
   index() {
@@ -91,14 +92,14 @@ function showPet(id) {
     const rentPet = pet.is_available ? `Please contact owner, ${pet.owner.name}` : 
       'Sorry, this pet is not available to rent at the moment.'
     const petHTML = `
-    <img src="${pet.image_url}" class="pet-img">
+    <img src="${pet.image_url || IMAGE_DEFAULT}" class="pet-img rounded mx-auto d-block">
     <h2>${pet.name}</h2>
     <p><b>Animal type: </b>${pet.pet_type}</p>
     <p><b>Characteristics: </b>${pet.description}</p>
     <small>${rentPet}</small> <br>
-    <button onclick="populateForm(${pet.id})">Edit</button>
-    <button onclick="deletePet(${pet.id})">Delete</button>
-    <button onclick="loadPets()">Back</button>
+    <button onclick="populateForm(${pet.id})" class="btn btn-warning">Edit</button>
+    <button onclick="deletePet(${pet.id})" class="btn btn-danger">Delete</button>
+    <button onclick="loadPets()" class="btn btn-primary">Back</button>
     `
     showPage.innerHTML = petHTML
   })
